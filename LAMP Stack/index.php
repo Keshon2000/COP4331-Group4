@@ -17,6 +17,8 @@
 	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Do It </button>
 	<span id="loginResult"></span>
 </div>
-
+<?php
+	echo "Helllo";
+?>
 </body>
 </html>
