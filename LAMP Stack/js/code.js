@@ -1,4 +1,4 @@
-const urlBase = 'http://openingdrive.space/LAMPAPI';
+const urlBase = 'http://openingdrive.space/index.html';
 const extension = 'php';
 
 let userId = 0;
