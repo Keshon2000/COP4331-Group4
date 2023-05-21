@@ -2,7 +2,7 @@
 
 <?php
     $host = 'localhost';
-    $databse = 'publications';
+    $databse = 'COP4331';
     $user = 'root';
     $password = 'root';
     $character_set = 'utf8mb4';
