@@ -1,21 +1,20 @@
 <?php
 	$inData = getRequestInfo();
 	
-	$ID = $inData["ID"];
-	$Name = $inData["Name"];
-    	$Phone = $inData["Phone"];
-    	$Email = $inData["Email"];
-    	$UserID = $inData["UserID"];
-
+	$contactName = $inData["contactName"];
+	$contactPhone = $inData["contactPhone"];
+	$contactEmail = $inData["contactEmail"];
+	$userId = $inData["userId"];
+	
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
-	if ($conn->connect_error) 
+	if ($conn->connect_error)
 	{
-		returnWithError( $conn->connect_error );
-	} 
+		returnWithError($conn->connect_error);
+	}
 	else
 	{
-		$stmt = $conn->prepare("INSERT into Contacts (UserId,Email,Phone,Name,ID) VALUES(?,?,?,?,?)");
-		$stmt->bind_param("sssss", $ID, $Name,$Phone,$Email,$UserID);
+		$stmt = $conn->prepare("INSERT INTO Contacts (Name, Phone, Email, UserID) VALUES(?, ?, ?, ?)");
+		$stmt->bind_param("sssi", $contactName, $contactPhone, $contactEmail, $userId);
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
@@ -38,5 +37,4 @@
 		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
-	
 ?>

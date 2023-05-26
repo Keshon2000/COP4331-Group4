@@ -1,4 +1,6 @@
-<html>
+<!DOCTYPE html>
+
+<!-- <html>
 <head>
 	<title>COP 4331 LAMP Stack Demo</title>
 	<script type="text/javascript" src="js/md5.js"></script>
@@ -14,9 +16,69 @@
 	<span id="inner-title">LOG IN</span>
 	<input type="text" id="loginName" placeholder="Username" /><br />
 	<input type="password" id="loginPassword" placeholder="Password"/><br />
-	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> LOGIN </button>
-	<span id="loginResult"></span>
+	<button type="button" id="loginButton" class="buttons" onclick="doLogin()"> LOGIN </button>
+	
+<span id="loginResult"></span>
 </div>
 
 </body>
+</html> -->
+
+<!-- HERE STARTS ADDED CODE -->
+<html>
+    <head>
+        <title>Contact Manager</title>
+		<script type="text/javascript" src="js/md5.js"></script>
+		<script type="text/javascript" src="js/code.js"></script>
+		<link href="css/styles.css" rel="stylesheet">	
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    </head>
+    <body>
+        <div class="hero">
+            <h1 id="title">Contact Manager </h1>
+            <div class="form-box">
+                <div class="button-box">
+                    <div id="btn"></div>
+                    <button type="button" class="toggle-btn" onclick="login()">Log In</button>
+                    <button type="button" class="toggle-btn" onclick="register()">Register</button>
+                </div>
+            <form id="login" class="input-group">
+                <input type="text" id="loginName" class="input-field" placeholder="User Id" required>
+                <input type="text" id="loginPassword" class="input-field" placeholder="Enter Password" required>
+                <button type="button" id="loginButton" class="submit-btn" onclick="doLogin()">Log in</button>
+                <span id="loginResult"></span>
+            </form>
+            <form id="register" class="input-group">
+                <input type="text" class="input-field" placeholder="Username" id="register_username" required>
+                <input type="text" class="input-field" placeholder="Email" id="register_email" required>
+                <input type="text" class="input-field" placeholder="First Name" id="register_fName" required>
+                <input type="text" class="input-field" placeholder="Last Name" id="register_lName" required>
+                <input type="password" class="input-field" placeholder="Enter Password" id="register_password" required>
+                <span id="registerResult"></span>
+                <button type="button" class="submit-btn" onclick="doRegistration()">Register</button> 
+            </form>
+            </div>
+        </div>
+        
+        <script>
+            var x = document.getElementById("login");
+            var y = document.getElementById("register");
+            var z = document.getElementById("btn");
+            
+            function register(){
+                x.style.left = "-400px";
+                y.style.left = "50px";
+                z.style.left = "110px";
+            }
+            
+            function login(){
+                x.style.left = "50px";
+                y.style.left = "450px";
+                z.style.left = "0";
+            }
+            
+        </script>
+    
+    
+    </body>
 </html>

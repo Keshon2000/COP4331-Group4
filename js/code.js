@@ -58,6 +58,46 @@ function doLogin()
 
 }
 
+function doRegistration()
+{
+	let register_username = document.getElementById("register_username").value;
+	let register_email = document.getElementById("register_email").value;
+	let register_password = document.getElementById("register_password").value;
+	let register_fName = document.getElementById("register_fName").value;
+	let register_lName = document.getElementById("register_lName").value;
+
+//	var hash = md5( password );
+	
+	document.getElementById("registerResult").innerHTML = "";
+
+	let tmp = {username:register_username, email:register_email, firstName:register_fName, lastName:register_lName, password:register_password};
+//	var tmp = {login:login,password:hash};
+	let jsonPayload = JSON.stringify( tmp );
+	
+	let url = urlBase + '/Registration.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				let jsonObject = JSON.parse(xhr.responseText);
+				document.getElementById("registerResult").innerHTML = jsonObject.data;
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("registerResult").innerHTML = err.message;
+	}
+
+}
+
 function saveCookie()
 {
 	let minutes = 20;
@@ -107,16 +147,20 @@ function doLogout()
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	window.location.href = "index.html";
 }
-
-function addColor()
+							
+function addContact()
 {
-	let newColor = document.getElementById("colorText").value;
-	document.getElementById("colorAddResult").innerHTML = "";
+	let contactName = document.getElementById("contactName").value;
+	let contactPhone = document.getElementById("contactPhone").value;
+	let contactEmail = document.getElementById("contactEmail").value;
+	
+	document.getElementById("contactAddResult").innerHTML = "";
 
-	let tmp = {color:newColor,userId,userId};
+	let tmp = {contactName,contactPhone,contactEmail,userId};
+	console.log(tmp);
 	let jsonPayload = JSON.stringify( tmp );
 
-	let url = urlBase + '/AddColor.' + extension;
+	let url = urlBase + '/AddContact.' + extension;
 	
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -127,29 +171,31 @@ function addColor()
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
+				document.getElementById("contactAddResult").innerHTML = "Contact has been added";
 			}
 		};
 		xhr.send(jsonPayload);
 	}
 	catch(err)
 	{
-		document.getElementById("colorAddResult").innerHTML = err.message;
+		document.getElementById("contactAddResult").innerHTML = err.message;
+		
 	}
 	
 }
 
-function searchColor()
-{
-	let srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
-	
-	let colorList = "";
 
-	let tmp = {search:srch,userId:userId};
+function DeleteContact()
+{
+	let contactName = document.getElementById("delContactName").value;
+	
+	document.getElementById("contactDeleteResult").innerHTML = "";
+
+	let tmp = {contactName};
+	console.log(tmp);
 	let jsonPayload = JSON.stringify( tmp );
 
-	let url = urlBase + '/SearchColors.' + extension;
+	let url = urlBase + '/DeleteContact.' + extension;
 	
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -160,26 +206,62 @@ function searchColor()
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
-				let jsonObject = JSON.parse( xhr.responseText );
-				
-				for( let i=0; i<jsonObject.results.length; i++ )
-				{
-					colorList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 )
-					{
-						colorList += "<br />\r\n";
-					}
-				}
-				
-				document.getElementsByTagName("p")[0].innerHTML = colorList;
+				document.getElementById("contactDeleteResult").innerHTML = "Contact has been Deleted";
 			}
 		};
 		xhr.send(jsonPayload);
 	}
 	catch(err)
 	{
-		document.getElementById("colorSearchResult").innerHTML = err.message;
+		document.getElementById("contactDeleteResult").innerHTML = err.message;
+		
 	}
+	
+}
+
+
+function searchContact()
+{
+	let search = document.getElementById("searchText").value;
+	document.getElementById("contactSearchResult").innerHTML = "";
+	
+	let contactList = "";
+	
+	let tmp = {search, userId};
+	let jsonPayload = JSON.stringify( tmp );
+
+	let url = urlBase + '/SearchContacts.' + extension;
+	
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
+				let jsonObject = JSON.parse( xhr.responseText );
+
+				for( let i=0; i < jsonObject.results.length; i++ )
+				{
+					contactList += jsonObject.results[i];
+					if( i < jsonObject.results.length - 1 )
+					{
+						contactList += "<br />\r\n";
+					}
+				}
+				
+				document.getElementById("contactList").innerHTML = contactList;
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("contactSearchResult").innerHTML = err.message;
+	}
+
 	
 }
