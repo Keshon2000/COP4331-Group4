@@ -216,6 +216,10 @@ function DeleteContact()
 		document.getElementById("contactDeleteResult").innerHTML = err.message;
 		
 	}
+}
+
+function editContact()
+{
 	
 }
 
