@@ -1,0 +1,108 @@
+<html lang="en">
+
+<head>
+        <title>COP 4331 LAMP Stack Demo</title>
+        <script src="js/code.js"></script>
+        <link href="css/styles.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        /*
+        <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                        readCookie();
+                }, false);
+        </script>
+        */
+</head>
+
+<body>
+        <div id="banner">
+                <div class="logo-and-name" id="logo-and-name">
+                        <img src="logo.jpg" alt="The logo for Group 4's team" id="logo">
+                        <h1>COP</h1>
+                        <h1 color="red">4</h1>
+                        <h1>theWin</h1>
+                </div>
+                <div class="popup" id="box">
+                        <a href="login-signup" class="button" onclick="popupForm()">Login/SignUp</a>
+                </div>
+        </div>
+        <div class="hero" id="login-signup">
+                <h1 id="title">Contact Manager </h1>
+                <div class="form-box">
+                        <div class="button-box">
+                                <div id="btn"></div>
+                                <button type="button" class="toggle-btn" onclick="login()">Log In</button>
+                                <button type="button" class="toggle-btn" onclick="register()">Register</button>
+                        </div>
+                        <form id="login" class="input-group">
+                                <input type="text" id="loginName" class="input-field" placeholder="User Id" required>
+                                <input type="text" id="loginPassword" class="input-field" placeholder="Enter Password" required>
+                                <button type="submit" id="loginButton" class="submit-btn" onclick="doLogin()">Login</button>
+                                <span id="loginResult"></span>
+                        </form>
+                        <form id="register" class="input-group">
+                                <input type="text" class="input-field" placeholder="Username" id="register_username"
+                                        required>
+                                <input type="text" class="input-field" placeholder="Email" id="register_email" required>
+                                <input type="text" class="input-field" placeholder="First Name" id="register_fName"
+                                        required>
+                                <input type="text" class="input-field" placeholder="Last Name" id="register_lName"
+                                        required>
+                                <input type="password" class="input-field" placeholder="Enter Password"
+                                        id="register_password" required>
+                                <span id="registerResult"></span>
+                                <button type="submit" class="submit-btn" onclick="doRegistration()">Register</button>
+                        </form>
+                </div>
+        </div>
+        <div class="opening-text" id="page_welcome">
+                <p>
+                        <?php
+                                $heading = <<<INTRO
+                                        The perfect 
+                                        <em>space</em> to
+                                        store all
+                                        your contacts.
+                                INTRO;
+
+                                echo '$heading';
+                        ?>
+                </p>
+
+        </div>
+
+        <div id="accessUIDiv">
+                <br>
+
+                <!-- Search Contacts -->
+                <input type="text" id="searchText" placeholder="Contact To Search For">
+                <button type="button" id="searchContactButton" class="buttons" onclick="searchContact();"> Search
+                        Contact </button><br>
+                <span id="contactSearchResult"></span>
+                <p id="contactList">
+                </p><br><br>
+
+                <!-- Add Contact -->
+                <input type="text" id="contactName" placeholder="Contact Name">
+                <input type="text" id="contactPhone" placeholder="Contact Phone Number">
+                <input type="text" id="contactEmail" placeholder="Contact Email">
+
+                <button type="button" id="addContactButton" class="buttons" onclick="addContact();"> Add Contact
+                </button><br>
+                <span id="contactAddResult"></span>
+
+
+                <!-- Delete Contact Test-->
+                <input type="text" id="delContactName" placeholder="Name of Contact to delete">
+                <button type="button" id="delContactButton" class="buttons" onclick="DeleteContact();"> Delete Contact
+                </button><br>
+                <span id="contactDeleteResult"></span>
+
+                <!-- Edit Contact Test-->
+                <button type="button" id="EditContactButton" class="buttons" onclick="location.href = 'EditForm.html';">
+                        Edit Contact </button><br>
+
+        </div>
+</body>
+
+</html>
