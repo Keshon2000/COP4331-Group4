@@ -1,7 +1,8 @@
 body
 {
-    background-image: url(../images/Aurora.jpg);
+    background-image: url(../images/newAurora.jpg);
     background-color: #FFFFFF;
+    background-position: top;
     background-size: contain;
     background-repeat: no-repeat;
     z-index: 1;
@@ -16,7 +17,10 @@ body
     position: sticky;
     top: 0px;
 }
-
+.opening-text
+{
+    white-space: pre;
+}
 #logo
 {
     display: block;
@@ -41,10 +45,23 @@ body
 {
     display: flex;
     position: relative;
-    transform: translateX(-3.25%) translateY(15%);
+    transform: translateX(-3.25%) translateY(12%);
     overflow: hidden;
 }
 
+#page_welcome
+{
+    height:fit-content;
+    width: fit-content;
+}
+.opening-text
+{
+    font-size: 50px;
+}
+#space
+{
+    color: #fc4828;
+}
 .picture
 {
     justify-content: flex-start;
