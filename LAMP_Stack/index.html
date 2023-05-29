@@ -14,18 +14,23 @@
 
 <body>
         <div id="banner">
-                <div class="logo-and-name" id="logo-and-name">
-                        <img src="logo.jpg" alt="The logo for Group 4's team" id="logo">
-                        <h1>COP</h1>
-                        <h1 color="red">4</h1>
-                        <h1>theWin</h1>
+                <div class="logo" id="logo--and-slogan">
+                        <img src="../LAMP_Stack/images/logoUp.png" alt="The logo for Group 4's team" id="logo">
                 </div>
                 <div class="popup" id="box">
                         <a href="login-signup" class="button" onclick="popupForm()">Login/SignUp</a>
                 </div>
         </div>
+        <div class="container">
+                <div class="picture">
+                        <img src="../LAMP_Stack/images/people1.png" id="pic1" alt="Picture of people on phones">
+                </div>
+                <div class="picture">
+                        <img src="../LAMP_Stack/images/people2.png" id="pic2" alt="2nd Picture of people on phones">
+                </div>
+        </div>
         <div class="hero" id="login-signup">
-                <h1 id="title">Contact Manager </h1>
+                <!--<h1 id="title">Contact Manager </h1>-->
                 <div class="form-box">
                         <div class="button-box">
                                 <div id="btn"></div>
@@ -34,16 +39,22 @@
                         </div>
                         <form id="login" class="input-group">
                                 <input type="text" id="loginName" class="input-field" placeholder="User Id" required>
-                                <input type="text" id="loginPassword" class="input-field" placeholder="Enter Password" required>
-                                <button type="submit" id="loginButton" class="submit-btn" onclick="doLogin()">Login</button>
+                                <input type="text" id="loginPassword" class="input-field" placeholder="Enter Password"
+                                        required>
+                                <button type="submit" id="loginButton" class="submit-btn"
+                                        onclick="doLogin()">Login</button>
                                 <span id="loginResult"></span>
                         </form>
                         <form id="register" class="input-group">
-                                <input type="text" class="input-field" placeholder="Username" id="register_username" required>
+                                <input type="text" class="input-field" placeholder="Username" id="register_username"
+                                        required>
                                 <input type="text" class="input-field" placeholder="Email" id="register_email" required>
-                                <input type="text" class="input-field" placeholder="First Name" id="register_fName" required>
-                                <input type="text" class="input-field" placeholder="Last Name" id="register_lName" required>
-                                <input type="password" class="input-field" placeholder="Enter Password" id="register_password" required>
+                                <input type="text" class="input-field" placeholder="First Name" id="register_fName"
+                                        required>
+                                <input type="text" class="input-field" placeholder="Last Name" id="register_lName"
+                                        required>
+                                <input type="password" class="input-field" placeholder="Enter Password"
+                                        id="register_password" required>
                                 <span id="registerResult"></span>
                                 <button type="submit" class="submit-btn" onclick="doRegistration()">Register</button>
                         </form>
@@ -70,7 +81,8 @@
 
                 <!-- Search Contacts -->
                 <input type="text" id="searchText" placeholder="Contact To Search For">
-                <button type="button" id="searchContactButton" class="buttons" onclick="searchContact();"> SearchContact </button><br>
+                <button type="button" id="searchContactButton" class="buttons" onclick="searchContact();"> SearchContact
+                </button><br>
                 <span id="contactSearchResult"></span>
                 <p id="contactList">
                 </p><br><br>
