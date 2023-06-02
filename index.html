@@ -27,7 +27,7 @@
 <!-- HERE STARTS ADDED CODE -->
 <html>
     <head>
-        <title>Contact Manager</title>
+        <title>Login</title>
 		<script type="text/javascript" src="js/md5.js"></script>
 		<script type="text/javascript" src="js/code.js"></script>
 		<link href="css/styles.css" rel="stylesheet">	
@@ -43,19 +43,24 @@
                     <button type="button" class="toggle-btn" onclick="register()">Register</button>
                 </div>
             <form id="login" class="input-group">
-                <input type="text" id="loginName" class="input-field" placeholder="User Id" required>
-                <input type="text" id="loginPassword" class="input-field" placeholder="Enter Password" required>
+                <label for="loginName">User ID:</label>
+                <input type="text" id="loginName" class="input-field" placeholder="Enter User ID" required>
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" class="input-field" placeholder="Enter Password" required>
                 <button type="button" id="loginButton" class="submit-btn" onclick="doLogin()">Log in</button>
                 <span id="loginResult"></span>
             </form>
             <form id="register" class="input-group">
-                <input type="text" class="input-field" placeholder="Username" id="register_username" required>
-                <input type="text" class="input-field" placeholder="Email" id="register_email" required>
+                <label for="register_fName">Enter First Name:</label>
                 <input type="text" class="input-field" placeholder="First Name" id="register_fName" required>
+                <label for="register_lName">Enter Last Name:</label>
                 <input type="text" class="input-field" placeholder="Last Name" id="register_lName" required>
+                <label for="register_username">Enter Username:</label>
+                <input type="text" class="input-field" placeholder="Username" id="register_username" required>
+                <label for="register_password">Password:</label>
                 <input type="password" class="input-field" placeholder="Enter Password" id="register_password" required>
                 <span id="registerResult"></span>
-                <button type="button" class="submit-btn" onclick="doRegistration()">Register</button> 
+                <button type="button" id="registerButton" class="submit-btn" onclick="doRegistration()">Register</button> 
             </form>
             </div>
         </div>
@@ -67,8 +72,8 @@
             
             function register(){
                 x.style.left = "-400px";
-                y.style.left = "50px";
-                z.style.left = "110px";
+                y.style.left = "50px"; 
+                z.style.left = "110px"; 
             }
             
             function login(){

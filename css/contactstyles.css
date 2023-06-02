@@ -1,0 +1,173 @@
+body {
+    background-color: #d9d0d0;
+}
+#searchText
+{
+	font-size: 30px;
+}
+#colorText
+{
+	font-size: 30px;
+}
+#searchContact{
+    margin-bottom: 0;
+}
+input[type="text"]{
+    border-radius: 25px;
+    text-align: center;
+    width: 50%;
+    margin-left: 10px;
+    margin-bottom: 5%;
+    font-family: 'Ubuntu', sans-serif;
+}
+input[type="text"]:focus{
+    background-color: rgb(255, 255, 255);
+}
+
+#inner-title{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #95060a;
+}
+
+#loginResult{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #95060a;
+}
+
+#userName{
+    display: inline-block;
+    width: 80%;
+    margin-top: 5%;
+    margin-left: 10%;
+    text-align: center;
+    font-size: 40px;
+}
+
+#logoutButton{
+    width: 20%;
+    margin-left: 40%;
+    border-radius: 30px;
+    background: linear-gradient(to right, #ff105f,#ffad06);
+    cursor:  pointer;
+}
+#contactName{
+    margin-bottom: 3%;
+}
+#contactPhone{
+    margin-bottom: 3%;
+    margin-left: 25%;
+}
+#contactEmail{
+    margin-bottom: 3%;
+    margin-left: 25%;
+}
+#delContactName{
+    margin-top: 3%;
+    margin-bottom: 0%;
+}
+#deleteName{
+    margin-left: 13%;
+}
+select{
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 2%;
+    font-size: 0.75em;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#colorSearchResult{
+    display: none;
+}
+
+#colorAddResult{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #95060a;
+}
+label{
+    margin-left: 15%;
+    font-size: 25px;
+}
+#searchLabel{
+    margin-left: 10%;
+    font-size: 25px;
+}
+#contactFirstName{
+    margin-bottom: 3%;
+}
+#contactLastName{
+    margin-left: 25%;
+    margin-bottom: 3%;
+}
+#contactSearchResult{
+    color:blue;
+    margin-left: 45%;
+}
+#contactAddResult{
+    color:blue;
+    margin-left: 45%;
+}
+#contactDeleteResult{
+    color:blue;
+    margin-left: 45%;
+}
+#editName{
+    margin-left: 14.5%;
+}
+#EditContactName{
+    margin-top: 3%;
+}
+button{
+    cursor:  pointer;
+}
+/* Contact Search Table */
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th {
+    background-color: #e6a131;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(odd) {
+    background-color: #dddddd;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+
+  td.editable-cell {
+    background-color: #FFF9C4; /* Example background color for editable rows */
+  }
+
+  tr.delete-row {
+    background-color: #ff0000; /* Example background color for deleting rows */
+}

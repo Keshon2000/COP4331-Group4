@@ -5,6 +5,7 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
+
 function doLogin()
 {
 	userId = 0;
@@ -14,7 +15,7 @@ function doLogin()
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
 //	var hash = md5( password );
-	
+
 	document.getElementById("loginResult").innerHTML = "";
 
 	let tmp = {login:login,password:password};
@@ -46,7 +47,7 @@ function doLogin()
 
 				saveCookie();
 	
-				window.location.href = "color.html";
+				window.location.href = "contacts.html";
 			}
 		};
 		xhr.send(jsonPayload);
@@ -61,7 +62,6 @@ function doLogin()
 function doRegistration()
 {
 	let register_username = document.getElementById("register_username").value;
-	let register_email = document.getElementById("register_email").value;
 	let register_password = document.getElementById("register_password").value;
 	let register_fName = document.getElementById("register_fName").value;
 	let register_lName = document.getElementById("register_lName").value;
@@ -70,7 +70,8 @@ function doRegistration()
 	
 	document.getElementById("registerResult").innerHTML = "";
 
-	let tmp = {username:register_username, email:register_email, firstName:register_fName, lastName:register_lName, password:register_password};
+	//let tmp = {username:register_username, email:register_email, firstName:register_fName, lastName:register_lName, password:register_password};
+	let tmp = {username:register_username, firstName:register_fName, lastName:register_lName, password:register_password};
 //	var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 	
@@ -150,14 +151,16 @@ function doLogout()
 							
 function addContact()
 {
-	let contactName = document.getElementById("contactName").value;
+	// Grab values
+	let contactFirstName = document.getElementById("contactFirstName").value;
+	let contactLastName = document.getElementById("contactLastName").value;
 	let contactPhone = document.getElementById("contactPhone").value;
 	let contactEmail = document.getElementById("contactEmail").value;
 	
 	document.getElementById("contactAddResult").innerHTML = "";
 
-	let tmp = {contactName,contactPhone,contactEmail,userId};
-	console.log(tmp);
+	// Create json object
+	let tmp = {contactFirstName, contactLastName, contactPhone, contactEmail, userId};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddContact.' + extension;
@@ -171,7 +174,13 @@ function addContact()
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("contactAddResult").innerHTML = "Contact has been added";
+				// Parse json
+				let jsonObject = JSON.parse( xhr.responseText );
+				document.getElementById("contactAddResult").innerHTML = jsonObject.results;
+
+				// Refresh list if no errors are present
+				if(!jsonObject.error)
+					searchContact();
 			}
 		};
 		xhr.send(jsonPayload);
@@ -181,83 +190,237 @@ function addContact()
 		document.getElementById("contactAddResult").innerHTML = err.message;
 		
 	}
-	
 }
 
+// Global variables for saving original contact before editing
+let origFirstName;
+let origLastName;
+let origPhone;
+let origEmail;
+let currentRow;
 
-function DeleteContact()
+function editContact(button)
 {
-	let contactName = document.getElementById("delContactName").value;
-	
-	document.getElementById("contactDeleteResult").innerHTML = "";
-
-	let tmp = {contactName};
-	console.log(tmp);
-	let jsonPayload = JSON.stringify( tmp );
-
-	let url = urlBase + '/DeleteContact.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
+	// Check if editing a different row and revert any changes
+	if(currentRow !== undefined && currentRow !== button.parentNode.parentNode)
 	{
-		xhr.onreadystatechange = function() 
+		// Remove editable table fields
+		for (let i = 0; i < currentRow.cells.length - 3; i++)
 		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("contactDeleteResult").innerHTML = "Contact has been Deleted";
-			}
-		};
-		xhr.send(jsonPayload);
+			currentRow.cells[i].classList.remove('editable-cell');
+			currentRow.cells[i].contentEditable = false;
+		}
+
+		// Revert text
+		currentRow.cells[0].textContent = origFirstName;
+		currentRow.cells[1].textContent = origLastName;
+		currentRow.cells[2].textContent = origEmail;
+		currentRow.cells[3].textContent = origPhone;
+		currentRow.cells[4].querySelector('button').textContent = "Edit";
 	}
-	catch(err)
+
+	// Set current row
+	currentRow = button.parentNode.parentNode;
+
+	// Set editable table fields of a given row
+	for (let i = 0; i < currentRow.cells.length - 3; i++)
+			currentRow.cells[i].contentEditable = true;
+
+	if(button.textContent === 'Save')
 	{
-		document.getElementById("contactDeleteResult").innerHTML = err.message;
+		// Get updated fields
+		let editFirstName = currentRow.cells[0].textContent;
+		let editLastName = currentRow.cells[1].textContent;
+		let editEmail = currentRow.cells[2].textContent;
+		let editPhone = currentRow.cells[3].textContent;
+		let contactId = currentRow.cells[6].textContent;
+
+		// Prep json
+		let tmp = {editFirstName, editLastName, editPhone, editEmail, contactId, userId};
+		let jsonPayload = JSON.stringify( tmp );
+
+		let url = urlBase + '/EditContact.' + extension;
+
+		// Only update database if changes were made
+		if(origFirstName !== editFirstName || origLastName !== editLastName || origEmail !== editEmail || origPhone !== editPhone)
+		{
+			let xhr = new XMLHttpRequest();
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+			try
+			{
+				xhr.onreadystatechange = function() 
+				{
+					if (this.readyState == 4 && this.status == 200) 
+					{
+						// Parse json and set search message
+						let jsonObject = JSON.parse( xhr.responseText );
+						document.getElementById("contactSearchResult").innerHTML = jsonObject.results;
+
+						// Revert text if there is an error
+						if(jsonObject.error)
+						{
+							currentRow.cells[0].textContent = origFirstName;
+							currentRow.cells[1].textContent = origLastName;
+							currentRow.cells[2].textContent = origEmail;
+							currentRow.cells[3].textContent = origPhone;
+						}
+						else
+						{
+							// Place N/A in empty cells
+							if(editLastName === "")
+								currentRow.cells[1].textContent = "N/A";
+							if(editEmail === "")
+								currentRow.cells[2].textContent = "N/A";
+							if(editPhone === "")
+								currentRow.cells[3].textContent = "N/A";
+						}
+					}
+				};
+				xhr.send(jsonPayload);
+			}
+			catch(err)
+			{
+				document.getElementById("contactSearchResult").innerHTML = err.message;
+			}
+		}
 		
+		// Remove editable table fields 
+		for (let i = 0; i < currentRow.cells.length - 3; i++)
+		{
+			currentRow.cells[i].classList.remove('editable-cell');
+			currentRow.cells[i].contentEditable = false;
+		}
+
+		button.textContent = "Edit";
+	}
+	else
+	{
+		// Save original row details, change button text, and set css class
+		origFirstName = currentRow.cells[0].textContent;
+		origLastName = currentRow.cells[1].textContent;
+		origEmail = currentRow.cells[2].textContent;
+		origPhone = currentRow.cells[3].textContent;
+
+		for (let i = 0; i < currentRow.cells.length - 3; i++)
+			currentRow.cells[i].classList.add('editable-cell');
+
+		button.textContent = "Save";
 	}
 }
 
-function editContact()
+function deleteContact(button)
 {
-	
-}
+	// Get row details
+	let row = button.parentNode.parentNode;
+	let name = row.cells[0].textContent;
+	let email = row.cells[1].textContent;
+	let phone = row.cells[2].textContent;
+	let contactId = row.cells[6].textContent;
 
+	// Set row class for css
+	row.classList.add('delete-row');
+
+	let result = confirm("Are you sure you want to delete the following contact?\nName: " + name + "\nEmail: " + email + "\nPhone: " + phone);
+	
+	if(result)
+	{
+		document.getElementById("contactSearchResult").innerHTML = "";
+
+		let tmp = {contactId};
+		let jsonPayload = JSON.stringify( tmp );
+
+		let url = urlBase + '/DeleteContact.' + extension;
+		
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+		try
+		{
+			xhr.onreadystatechange = function() 
+			{
+				if (this.readyState == 4 && this.status == 200) 
+				{
+					// Set search message
+					let jsonObject = JSON.parse( xhr.responseText );
+					document.getElementById("contactSearchResult").innerHTML = jsonObject.results;
+					
+					// Clear row
+					row.parentNode.removeChild(row);
+				}
+			};
+			xhr.send(jsonPayload);
+		}
+		catch(err)
+		{
+			document.getElementById("contactSearchResult").innerHTML = err.message;
+		}
+	}
+	row.classList.remove('delete-row');
+}
 
 function searchContact()
 {
-	let search = document.getElementById("searchText").value;
-	document.getElementById("contactSearchResult").innerHTML = "";
-	
-	let contactList = "";
-	
+	let search = document.getElementById("searchContact").value;
+
+	// Set headings
+	let contactTable = 
+	'<tr>' + 
+	'<th onclick="sortTable(0)">First Name</th>' + 
+	'<th onclick="sortTable(1)">Last Name</th>' + 
+	'<th onclick="sortTable(2)">Email</th>' + 
+	'<th onclick="sortTable(3)">Phone</th>' + 
+	'<th>Edit</th>' + 
+	'<th>Delete</th>' + 
+	'<th style="display: none;">ID</th>' + 
+	'</tr>';
+
 	let tmp = {search, userId};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/SearchContacts.' + extension;
-	
+
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
-		xhr.onreadystatechange = function() 
+		xhr.onreadystatechange = function()
 		{
-			if (this.readyState == 4 && this.status == 200) 
+			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
 
-				for( let i=0; i < jsonObject.results.length; i++ )
+				// Check for error				
+				if(jsonObject.error)
+					document.getElementById("contactSearchResult").innerHTML = jsonObject.errorMessage;
+				else
 				{
-					contactList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 )
+					document.getElementById("contactSearchResult").innerHTML = "";
+
+					// Fill out table
+					for( let i=0; i < jsonObject.results.length; i++ )
 					{
-						contactList += "<br />\r\n";
+						contactTable += "<tr>";
+						
+						contactTable += "<td>" + jsonObject.results[i].firstName + "</td>";
+						contactTable += "<td>" + jsonObject.results[i].lastName + "</td>";
+						contactTable += "<td>" + jsonObject.results[i].email + "</td>";
+						contactTable += "<td>" + jsonObject.results[i].phone + "</td>";
+
+						// Edit & Delete Buttons
+						contactTable += "<td>" + '<button onclick="editContact(this)">Edit</button>' + "</td>";
+						contactTable += "<td>" + '<button onclick="deleteContact(this)">Delete</button>' + "</td>";
+						
+						// Contact ID
+						contactTable += '<td style="display: none;">' + jsonObject.results[i].id + "</td>";
+						
+						contactTable += "</tr>";
 					}
+					
+					// Set table
+					document.getElementById("contactTable").innerHTML = contactTable;
 				}
-				
-				document.getElementById("contactList").innerHTML = contactList;
 			}
 		};
 		xhr.send(jsonPayload);
@@ -265,5 +428,47 @@ function searchContact()
 	catch(err)
 	{
 		document.getElementById("contactSearchResult").innerHTML = err.message;
-  }
+
+	}
 }
+
+// Initial sorting order
+let sortingOrder = "asc";
+
+function sortTable(columnIndex)
+{
+	let table, rows, switching, i, x, y;
+	table = document.getElementById("contactTable");
+	switching = true;
+
+	while (switching)
+	{
+		switching = false;
+		rows = table.rows;
+
+		for (i = 1; i < rows.length - 1; i++)
+		{
+			x = rows[i].getElementsByTagName("td")[columnIndex];
+			y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+			let comparisonResult;
+			if (sortingOrder === "asc")
+				comparisonResult = x.innerHTML.toLowerCase().localeCompare(y.innerHTML.toLowerCase());
+			else
+				comparisonResult = y.innerHTML.toLowerCase().localeCompare(x.innerHTML.toLowerCase());
+
+			if (comparisonResult > 0)
+			{
+				rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+				switching = true;
+				break;
+			}
+		}
+	}
+
+	// Toggle sorting order
+	if (sortingOrder === "asc")
+		sortingOrder = "desc";
+	else
+		sortingOrder = "asc";
+ }

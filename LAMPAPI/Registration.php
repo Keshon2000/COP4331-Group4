@@ -1,15 +1,11 @@
 <?php
 	$inData = getRequestInfo();
-
-	//TODO
-	// Registration Date
-	// Test everything as lowercase
 	
 	$id = 0;
 	$registerDate = date('Y-m-d H:i:s');
 	$firstName = $inData['firstName'];
 	$lastName = $inData['lastName'];
-	$email = $inData['email'];
+	//$email = $inData['email'];
 	$username = $inData['username'];
 	$password = $inData['password'];
 
@@ -20,23 +16,27 @@
 	}
 	else
 	{
+		
 		// Check if Email is Already in use
 		  // Email field is not currently in database
-		/*$stmt = $conn->prepare("SELECT Email FROM Users WHERE Email = ?");
+
+		// Validate the email address format
+		/*if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+			returnWithError("Invalid email address.");
+		$stmt = $conn->prepare("SELECT Email FROM Users WHERE Email = ?");
 		$stmt->bind_param("s", $email);
 		$stmt->execute();
 		$result = $stmt->get_result();
 		if($result->num_rows > 0)
 		{
 			// Display email error
-			returnWithError("Email Already in Use.");
+			returnWithError("Error: Email Already in Use.");
 			$stmt->close();
 			$conn->close();
 		}
 		else
 		{*/
 			// Check if Username exists
-			$message = "";
 			$stmt = $conn->prepare("SELECT Login FROM Users WHERE Login = ?");
 			$stmt->bind_param("s", $username);
 			$stmt->execute();
@@ -44,7 +44,16 @@
 			if($result->num_rows > 0)
 			{
 				// Display Username Error
-				returnWithError("Username Already Exists.");
+				returnWithError("Error: Username Already Exists.");
+				$stmt->close();
+				$conn->close();
+				return;
+			}
+
+			// Check password strength
+			if(!checkPasswordStrength($password))
+			{
+				returnWithError("Error: Password must contain: at least one capital letter, at least one special character, at least one number, must be eight characters or longer.");
 				$stmt->close();
 				$conn->close();
 				return;
@@ -60,6 +69,24 @@
 			$conn->close();
 	}
 	
+	function checkPasswordStrength($password)
+	{
+		// Define the regex patterns for each requirement
+		$patterns = [
+		  '/[A-Z]/', // At least one capital letter
+		  '/[!@#$%^&*(),.?":{}|<>]/', // At least one special character
+		  '/\d/', // At least one number
+		  '/.{8,}/' // At least 8 characters long
+		];
+	  
+		// Check if the password meets all the requirements
+		foreach ($patterns as $pattern)
+		  if (!preg_match($pattern, $password))
+			return false;
+	  
+		return true;
+	  }
+
 	function getRequestInfo()
 	{
 		return json_decode(file_get_contents('php://input'), true);
