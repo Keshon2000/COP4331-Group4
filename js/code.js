@@ -428,6 +428,7 @@ function searchContact()
 	catch(err)
 	{
 		document.getElementById("contactSearchResult").innerHTML = err.message;
+
 	}
 }
 
@@ -470,4 +471,4 @@ function sortTable(columnIndex)
 		sortingOrder = "desc";
 	else
 		sortingOrder = "asc";
-}
+ }
