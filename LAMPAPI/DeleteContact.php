@@ -1,11 +1,8 @@
 <?php
-// Reads in request as Json file
 	$inData = getRequestInfo();
 	
-	//Acesses json w/ key value pair
-	$contactName = $inData["contactName"];
+	$contactId = $inData["contactId"];
 	
-	//connection to database
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error)
 	{
@@ -13,16 +10,16 @@
 	}
 	else
 	{
-		// preparing mysql query replaces ? w/ the values in bind param
-		$stmt = $conn->prepare("DELETE FROM Contacts WHERE Name = ?");
-		$stmt->bind_param("s", $contactName);
-		$stmt->execute(); // executes query
-		$stmt->close(); //closing connection
+		$stmt = $conn->prepare("DELETE FROM Contacts WHERE ID = ?");
+		$stmt->bind_param("i", $contactId);
+		$stmt->execute();
+
+		returnWithInfo("Contact removed.");
+		
+		$stmt->close();
 		$conn->close();
-		returnWithError("");
 	}
 
-	// I beleive this turns tmp from code.js into a json file
 	function getRequestInfo()
 	{
 		return json_decode(file_get_contents('php://input'), true);
@@ -34,10 +31,11 @@
 		echo $obj;
 	}
 	
-	function returnWithError( $err )
+	function returnWithInfo( $searchResults )
 	{
-		$retValue = '{"error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
+		$data = array(
+			'results' => $searchResults
+		);
+		sendResultInfoAsJson( json_encode($data) );
 	}
-?>
 ?>

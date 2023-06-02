@@ -68,35 +68,42 @@ body
 *{
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
     font-family: sans-serif;
 }
 #title 
 {
     font-size: 40px;
     width: 100%;
-    text-align: center;
-    color: #FFFFFF;
+    margin-top: 5%;
+    margin-left: 41%;
+    color: #d9d0d0;
+    position: fixed;
 }
 .hero{
     height: 100%;
     width: 120%;
-    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(../images/mountains.jpg);
+    background-image: url(../images/Aurora.jpg);
+    /*background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(../images/mountains.jpg);*/
+    background-color: #FFFFFF;
     background-position: center;
     background-size: cover;
-    position: absolute;
+    position: fixed;
 }
 .form-box{
     width: 380px;
-    height: 480px;
-    position: relative;
-    margin: 6% auto;
-    background: #fff;
+    height: 480px; 
+    position: fixed;
+    margin-top: 11%;
+    margin-left: 39%;
+    border-radius: 30px;
+    background: #d9d0d0;
     padding: 5px; 
     overflow: hidden;
 }
 .button-box{
-    width: 220px;
-    margin: 35px auto;
+    width: 212px;
+    margin: 20px auto;
     position: relative;
     box-shadow: 0 0 20px 9px #ff61241f;
     border-radius: 30px;
@@ -109,6 +116,11 @@ body
     outline: none;
     position: relative;
 }
+label{
+    display: inline-block;
+    width: 150px;
+    color: #1d1b1b;
+}
 #btn{
     top: 0;
     bottom: 0;
@@ -120,19 +132,15 @@ body
     transition: .5s;
 }
 .input-group{
-    top: 180px;
     position: absolute;
     width: 280px;
     transition: .5s;
 }
 .input-field{
-    width: 100%;
+    width: 50px;
     padding: 10px 0;
-    margin: 5px 0;
-    border-left: 0;
-    border-top: 0;
-    border-right: 0;
-    border-bottom: 1px solid #999;
+    margin-left: 0;
+    border: 1px solid #1d1b1b;
     outline:  none;
     background: transparent;
 }
@@ -141,21 +149,36 @@ body
     padding: 10px 30px;
     cursor: pointer;
     display: block;
-    margin: auto;
+    margin-top: 5%;
+    margin-left: 20px;
     background: linear-gradient(to right, #ff105f,#ffad06);
     border: 0;
     outline: none;
     border-radius: 30px;
     
 }
-.check-box{
-    margin: 30px 10px 30px 0;
-}
 span{
-    color: #777;
+    color: #ff105f;;
     font-size: 12px;
-    bottom: 68px;
     position: absolute;
+    bottom: 90px;
+}
+#registerButton{
+    margin-top: 22%;
+}
+#registerResult{
+    color: #ff105f;;
+    font-size: 12px;
+    position: absolute;
+    left: 50px;
+    bottom: 53px;
+}
+#loginResult{
+    color: #ff105f;;
+    font-size: 12px;
+    position: absolute;
+    bottom: 40px;
+    margin-left: 15%;
 }
 #login{
     left: 50px;
@@ -163,8 +186,31 @@ span{
 #register{
     left: 450px;
 }
+input[type="text"]{
+    border-radius: 25px;
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+    font-family: 'Ubuntu', sans-serif;
+}
+input[type="text"]:focus{
+    background-color: rgb(255, 255, 255);
+}
+input[type="password"]{
+    border-radius: 25px;
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+    font-family: 'Ubuntu', sans-serif;
+}
+input[type="password"]:focus{
+    background-color: rgb(255, 255, 255);
+}
+
 /* HERE ENDS ADDED CODE */
-#searchText
+/* #searchText
 {
 	font-size: 30px;
 }
@@ -173,14 +219,7 @@ span{
 	font-size: 30px;
 }
 
-input[type="text"],input[type="password"]{
-    border-radius: 25px;
-    text-align: center;
-    width: 80%;
-    margin-left: 10%;
-    margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
-}
+
 
 #inner-title{
     display: inline-block;
@@ -238,4 +277,4 @@ select{
     margin-bottom: 1%;
     font-family: 'Ubuntu', sans-serif;
     color: #95060a;
-}
+} */

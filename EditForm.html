@@ -1,14 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <p>This is the place to edit a contact</p>
-</head>
 
-<body>
-    
-</body>
+<html>
+	<head>
+		<title>EditForm</title>
+		<script type="text/javascript" src="js/code.js"></script>
+		<link href="css/contactstyles.css" rel="stylesheet">	
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+		
+	</head>
+	<body onLoad = "EditContact()">
+		
+
+
+			<!-- Add Contact -->
+			
+			<input type="text" id="NewcontactName" placeholder="Contact Name">
+			<input type="text" id="NewcontactPhone" placeholder="Contact Phone Number">
+			<input type="text" id="NewcontactEmail" placeholder="Contact Email">
+			<button type="button" id="addContactButton" class="buttons" onclick="SubmitEdit();"> Submit  </button><br />
+			<span id="contactAddResult"></span>
+
+		</div>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+  			const urlParams = new URLSearchParams(window.location.search);
+  			const contactName = urlParams.get('contactName');
+  			document.getElementById("NewcontactName").value = contactName;});
+		</script>
+	</body>
 </html>
+
