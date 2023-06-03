@@ -365,6 +365,7 @@ function searchContact()
 
 	// Set headings
 	let contactTable = 
+	'<div id="contact-table">'
 	'<tr>' + 
 	'<th onclick="sortTable(0)">First Name</th>' + 
 	'<th onclick="sortTable(1)">Last Name</th>' + 
@@ -373,7 +374,8 @@ function searchContact()
 	'<th>Edit</th>' + 
 	'<th>Delete</th>' + 
 	'<th style="display: none;">ID</th>' + 
-	'</tr>';
+	'</tr>'
+	'</div>';
 
 	let tmp = {search, userId};
 	let jsonPayload = JSON.stringify( tmp );
