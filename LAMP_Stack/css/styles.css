@@ -6,20 +6,30 @@ body
     background-size: contain;
     background-repeat: no-repeat;
     z-index: 1;
+    position:relative;
 }
 
+#title 
+{
+    font-size: 40px;
+    width: 100%;
+    margin: 2% 5%;
+    text-align: center;
+    /*font-family: 'Ubuntu', sans-serif;*/
+    color: #FFFFFF;
+}
+
+/* top banner */
 #banner
 {
+    box-sizing: border-box;
     display: flex;
     width: 100%;
-    height: 50px;
-    background-color: #302d2d;
+    height: 45px;
+    background-color: black;
     position: sticky;
     top: 0px;
-}
-.opening-text
-{
-    white-space: pre;
+    z-index: 99;
 }
 #logo
 {
@@ -30,45 +40,38 @@ body
     width: auto;
     height: auto;
 }
-
+/*Popup Form */
 #box
 {
     height: 25px;
     width: 105px;
     position: absolute;
-    right:0;
-    top: 10;
+    right: 8px;
+    top: 8px;
     z-index: 3;
 }
+#open-form
+{
+    
+    color: black;
+    padding:3px;
+    margin: auto;
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-width: 2px;
+}
 
+/*Images of people on phones*/
 .container
 {
     display: flex;
     position: relative;
     transform: translateX(-3.25%) translateY(12%);
-    overflow: hidden;
 }
 
-#page_welcome
-{
-    height:fit-content;
-    width: fit-content;
-}
-.opening-text
-{
-    font-size: 50px;
-}
-#space
-{
-    color: #fc4828;
-}
 .picture
 {
     justify-content: flex-start;
-}
-.picture
-{
-    z-index: 2;
 }
 #pic1
 {
@@ -76,7 +79,6 @@ body
     position: relative;
     object-fit: scale-down;
     transform: translateX(3.5%) translateY(-10%);
-    overflow: hidden;
     z-index: 2;
 }
 #pic2
@@ -85,141 +87,211 @@ body
     position: relative;
     object-fit: scale-down;
     transform: translateX(-2.35%) translateY(4%);
-    overflow: hidden;
     z-index: 2;
 }
-#title 
+
+/* Login/Registration Form */
+.form-box
 {
-    font-size: 40px;
-    width: 100%;
-    margin: 2% 5%;
-    text-align: center;
-    font-family: 'Ubuntu', sans-serif;
-    color: #FFFFFF;
-}
-
-#loginDiv
-{
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
-}
-
-#loggedInDiv
-{
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
-}
-
-#accessUIDiv
-{
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
-}
-
-.buttons
-{
-    font-size: 30px;
-    border-radius: 25px;
-    width: 50%;
-    margin-left: 25%;
-    font-family: 'Ubuntu', sans-serif;
-}
-
-.buttons:hover{
-    background-color: #00d5124f;
-    color: #FFFFFF;
-    opacity: 50%;
-}
-
-#loginName
-{
-	font-size: 30px;
-}
-#loginPassword
-{
-	font-size: 30px;
-}
-#searchText
-{
-	font-size: 30px;
-}
-#colorText
-{
-	font-size: 30px;
-}
-
-input[type="text"],input[type="password"]{
-    border-radius: 25px;
-    text-align: center;
-    width: 80%;
-    margin-left: 10%;
-    margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
-}
-
-#inner-title{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
-}
-
-#loginResult{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
-}
-
-#userName{
-    display: inline-block;
-    width: 80%;
-    margin-left: 10%;
-    text-align: center;
-}
-
-#logoutButton{
-    width: 20%;
-    margin-left: 40%;
-}
-
-select{
-    width: 30%;
-    margin-left: 35%;
-    margin-top: 2%;
-    font-size: 0.75em;
-    font-family: 'Ubuntu', sans-serif;
-}
-
-#colorSearchResult{
     display: none;
+    width: 380px;
+    height: 480px; 
+    position: fixed;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    border-radius: 30px;
+    background: #d9d0d0;
+    padding: 5px; 
+    overflow: hidden;
+    z-index: 97;
+    background-color: black;
+}
+#close-form
+{
+    position: absolute;
+    right:15px;
+    top: 10px;
+}
+.button-box{
+    display: flex;
+    width: 212px;
+    margin: 20px auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px #ff61241f;
+    border-radius: 30px;
+}
+.toggle-btn{
+    color: #FFFFFF;
+    padding: 10px 30px;
+    cursor:  pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+}
+label{
+    display: inline-block;
+    width: 150px;
+    color: #1d1b1b;
+}
+#btn{
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    width: 100px;
+    height: 100%;
+    background: linear-gradient(to right, #ff105f,#ffad06);
+    border-radius: 30px;
+    transition: .5s;
+}
+.input-group{
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+}
+.input-field{
+    width: 50px;
+    padding: 10px 0;
+    margin-left: 0;
+    border: 1px solid #1d1b1b;
+    outline:  none;
+    background: transparent;
+}
+.submit-btn{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin-top: 5%;
+    margin-left: 20px;
+    background: linear-gradient(to right, #ff105f,#ffad06);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    
+}
+span{
+    color: #ff105f;;
+    font-size: 12px;
+    position: absolute;
+    bottom: 90px;
+}
+#registerButton{
+    margin-top: 12%;
+}
+#registerResult{
+    color: #ff105f;;
+    font-size: 12px;
+    position: absolute;
+    left: 50px;
+    bottom: 53px;
+}
+#loginResult{
+    color: #ff105f;;
+    font-size: 12px;
+    position: absolute;
+    bottom: 40px;
+    margin-left: 15%;
+}
+#login{
+    left: 50px;
+}
+#register{
+    left: 450px;
+}
+label
+{
+    color: #FFFFFF;
+}
+input[type="text"]{
+    border-color: #FFFFFF;
+    border-radius: 25px;
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+    font-family: 'Ubuntu', sans-serif;
+}
+input[type="text"]:focus{
+    background-color: rgb(255, 255, 255);
+}
+input[type="password"]{
+    border-color: #FFFFFF;
+    border-radius: 25px;
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+    font-family: 'Ubuntu', sans-serif;
+}
+input[type="password"]:focus{
+    background-color: rgb(255, 255, 255);
 }
 
-#colorAddResult{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-top: 2%;
-    margin-bottom: 1%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
+/* Middle of the Document*/
+#body-container
+{
+    display: flex;
+    position:relative;
 }
+#page_welcome
+{
+    margin: 20px;
+    white-space: pre-line;
+    height:fit-content;
+    width: fit-content;
+    font-size: 66px;
+    position: absolute;
+    left: 200px;
+    top: 30px;
+}
+#space
+{
+    color: #fc4828;
+}
+#phone-container
+{
+    display: inline-block;
+    height: fit-content;
+    width: fit-content;
+    position: absolute;
+    right: 95px;
+    top: 25px;
+}
+#phone-pic
+{
+    position: relative;
+    left: 575px;
+    top: 30px;
+    width: 50%;
+    height:auto;
+    object-fit: scale-down;
+}
+
+/* Bottom banner */
+#bottom-banner
+{
+    text-align: center;
+    position: absolute;
+    top:1000px;
+    width: 100%;
+    height: 75px;
+    background-color: black;
+}
+#bottom-text
+{
+    display: inline-block;
+    position: relative;
+    margin:auto;
+    font-size: 50px;
+    color:#FFFFFF;
+    text-decoration: none;
+    font-family: cursive;
+}
+a:hover
+{
+    color:#fc4828;
+}
+    

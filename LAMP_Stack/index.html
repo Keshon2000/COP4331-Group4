@@ -17,8 +17,8 @@
                 <div class="logo" id="logo--and-slogan">
                         <img src="../LAMP_Stack/images/logoUp.png" alt="The logo for Group 4's team" id="logo">
                 </div>
-                <div class="popup" id="box">
-                        <a href="login-signup" class="button" onclick="popupForm()">Login/SignUp</a>
+                <div id="box">
+                        <button type="button" id="open-form" onclick="openForm()">Login/SignUp</button>
                 </div>
         </div>
         <div class="container">
@@ -29,73 +29,84 @@
                         <img src="../LAMP_Stack/images/people2.png" id="pic2" alt="2nd Picture of people on phones">
                 </div>
         </div>
-        <!--<div class="hero" id="login-signup">
-                <div class="form-box">
-                        <div class="button-box">
-                                <div id="btn"></div>
-                                <button type="button" class="toggle-btn" onclick="login()">Log In</button>
-                                <button type="button" class="toggle-btn" onclick="register()">Register</button>
-                        </div>
-                        <form id="login" class="input-group">
-                                <input type="text" id="loginName" class="input-field" placeholder="User Id" required>
-                                <input type="text" id="loginPassword" class="input-field" placeholder="Enter Password"
-                                        required>
-                                <button type="submit" id="loginButton" class="submit-btn"
-                                        onclick="doLogin()">Login</button>
-                                <span id="loginResult"></span>
-                        </form>
-                        <form id="register" class="input-group">
-                                <input type="text" class="input-field" placeholder="Username" id="register_username"
-                                        required>
-                                <input type="text" class="input-field" placeholder="Email" id="register_email" required>
-                                <input type="text" class="input-field" placeholder="First Name" id="register_fName"
-                                        required>
-                                <input type="text" class="input-field" placeholder="Last Name" id="register_lName"
-                                        required>
-                                <input type="password" class="input-field" placeholder="Enter Password"
-                                        id="register_password" required>
-                                <span id="registerResult"></span>
-                                <button type="submit" class="submit-btn" onclick="doRegistration()">Register</button>
-                        </form>
+        <div class="form-box" id="login-signup">
+                <div id="close-form">
+                        <button type="button" onclick="closeForm()">x</button>
+                </div>
+                <div class="button-box">
+                        <div id="btn"></div>
+                        <button type="button" class="toggle-btn" onclick="login()">Log In</button>
+                        <button type="button" class="toggle-btn" onclick="register()">Register</button>
+                </div>
+                <form id="login" class="input-group">
+                        <label for="loginName">User ID:</label>
+                        <input type="text" id="loginName" class="input-field" placeholder="Enter User ID" required>
+                        <label for="loginPassword">Password:</label>
+                        <input type="password" id="loginPassword" class="input-field" placeholder="Enter Password"
+                                required>
+                        <button type="submit" id="loginButton" class="submit-btn" onclick="doLogin()">Log in</button>
+                        <span id="loginResult"></span>
+                </form>
+                <form id="register" class="input-group">
+                        <label for="register_fName">Enter First Name:</label>
+                        <input type="text" class="input-field" placeholder="First Name" id="register_fName" required>
+                        <label for="register_lName">Enter Last Name:</label>
+                        <input type="text" class="input-field" placeholder="Last Name" id="register_lName" required>
+                        <label for="register_username">Enter Username:</label>
+                        <input type="text" class="input-field" placeholder="Username" id="register_username" required>
+                        <label for="register_password">Password:</label>
+                        <input type="password" class="input-field" placeholder="Enter Password" id="register_password"
+                                required>
+                        <span id="registerResult"></span>
+                        <button type="submit" id="registerButton" class="submit-btn" onclick="doRegistration()">Register</button>
+                </form>
+        </div>
+        <div id="body-container">
+                <div id="page_welcome">
+                        The perfect
+                        <em id="space">space</em> for you, to
+                        store all your contacts.
+                </div>
+                <div id="phone-container">
+                        <img src="../LAMP_Stack/images/phoneUp.png" id="phone-pic"
+                                alt="Picture of phone with contacts">
                 </div>
         </div>
-        -->
-        <div class="opening-text" id="page_welcome">
-                The perfect
-                <em id="space">space</em> for you, to
-                store all your contacts.
+        <div id="bottom-banner">
+                <a href="https://github.com/Keshon2000/COP4331-Group4" id="bottom-text">For Research Purposes</a>
         </div>
-        <!--
-        <div id="accessUIDiv">
-                <br>
 
-                
-                <input type="text" id="searchText" placeholder="Contact To Search For">
-                <button type="button" id="searchContactButton" class="buttons" onclick="searchContact();"> SearchContact
-                </button><br>
-                <span id="contactSearchResult"></span>
-                <p id="contactList">
-                </p><br><br>
+        <script>
+                var x = document.getElementById("login");
+                var y = document.getElementById("register");
+                var z = document.getElementById("btn");
 
-                
-                <input type="text" id="contactName" placeholder="Contact Name">
-                <input type="text" id="contactPhone" placeholder="Contact Phone Number">
-                <input type="text" id="contactEmail" placeholder="Contact Email">
-                <button type="button" id="addContactButton" class="buttons" onclick="addContact();"> Add Contact
-                </button><br>
-                <span id="contactAddResult"></span>
+                var o = document.getElementById(open-form)
+                var c = document.getElementById(close-form)
 
+                function register() {
+                        x.style.left = "-400px";
+                        y.style.left = "50px";
+                        z.style.left = "110px";
+                }
 
-                <input type="text" id="delContactName" placeholder="Name of Contact to delete">
-                <button type="button" id="delContactButton" class="buttons" onclick="DeleteContact();"> Delete Contact
-                </button><br>
-                <span id="contactDeleteResult"></span>
+                function login() {
+                        x.style.left = "50px";
+                        y.style.left = "450px";
+                        z.style.left = "0";
+                }
 
-               
-                <button type="button" id="EditContactButton" class="buttons" onclick="location.href = 'EditForm.html';">
-                        Edit Contact </button><br>
+                function openForm()
+                {
+                       document.getElementById("login-signup").style.display = "block"; 
+                }
 
-        </div>-->
+                function closeForm()
+                {
+                        document.getElementById("login-signup").style.display = "none";
+                }
+
+        </script>
 </body>
 
 </html>
