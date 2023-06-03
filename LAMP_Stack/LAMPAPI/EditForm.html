@@ -1,0 +1,25 @@
+!DOCTYPE html
+<html lang="en">
+	<head>
+		<title>EditForm</title>
+		<script src="js/code.js"></script>
+		<link href="css/contactstyles.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	</head>
+	<body onload="EditContact()">
+			<!-- Add Contact -->
+			<input type="text" id="NewcontactName" placeholder="Contact Name">
+			<input type="text" id="NewcontactPhone" placeholder="Contact Phone Number">
+			<input type="text" id="NewcontactEmail" placeholder="Contact Email">
+			<button type="button" id="addContactButton" class="buttons" onclick="SubmitEdit();"> Submit  </button><br>
+			<span id="contactAddResult"></span>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+  			const urlParams = new URLSearchParams(window.location.search);
+  			const contactName = urlParams.get('contactName');
+  			document.getElementById("NewcontactName").value = contactName;});
+		</script>
+	</body>
+</html>
+
