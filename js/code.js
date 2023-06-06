@@ -440,6 +440,7 @@ function searchContact()
 	catch(err)
 	{
 		document.getElementById("contactSearchResult").innerHTML = err.message;
+
 	}
 }
 
