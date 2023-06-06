@@ -152,10 +152,10 @@ function doLogout()
 function addContact()
 {
 	// Grab values
-	let contactFirstName = document.getElementById("contactFirstName").value;
-	let contactLastName = document.getElementById("contactLastName").value;
-	let contactPhone = document.getElementById("contactPhone").value;
-	let contactEmail = document.getElementById("contactEmail").value;
+	let contactFirstName = document.getElementById("addContactFirstName").value;
+	let contactLastName = document.getElementById("addContactLastName").value;
+	let contactPhone = document.getElementById("addContactPhone").value;
+	let contactEmail = document.getElementById("addContactEmail").value;
 	
 	document.getElementById("contactAddResult").innerHTML = "";
 
@@ -180,7 +180,13 @@ function addContact()
 
 				// Refresh list if no errors are present
 				if(!jsonObject.error)
+				{
+					document.getElementById("addContactFirstName").value = "";
+					document.getElementById("addContactLastName").value = "";
+					document.getElementById("addContactPhone").value = "";
+					document.getElementById("addContactEmail").value = "";
 					searchContact();
+				}
 			}
 		};
 		xhr.send(jsonPayload);
@@ -201,6 +207,7 @@ let currentRow;
 
 function editContact(button)
 {
+	let table = document.getElementById("contactTable");
 	// Check if editing a different row and revert any changes
 	if(currentRow !== undefined && currentRow !== button.parentNode.parentNode)
 	{
@@ -312,6 +319,7 @@ function editContact(button)
 function deleteContact(button)
 {
 	// Get row details
+	let table = document.getElementById("contactTable");
 	let row = button.parentNode.parentNode;
 	let name = row.cells[0].textContent;
 	let email = row.cells[1].textContent;
@@ -374,6 +382,8 @@ function searchContact()
 	'<th>Delete</th>' + 
 	'<th style="display: none;">ID</th>' + 
 	'</tr>';
+	
+	
 
 	let tmp = {search, userId};
 	let jsonPayload = JSON.stringify( tmp );
@@ -409,8 +419,10 @@ function searchContact()
 						contactTable += "<td>" + jsonObject.results[i].phone + "</td>";
 
 						// Edit & Delete Buttons
-						contactTable += "<td>" + '<button onclick="editContact(this)">Edit</button>' + "</td>";
-						contactTable += "<td>" + '<button onclick="deleteContact(this)">Delete</button>' + "</td>";
+						contactTable += "<td>" + '<button type="button" class="buttons" onclick="editContact(this)">Edit</button>' + "</td>";
+						contactTable += "<td>" + '<button type="button" class="buttons" onclick="deleteContact(this)">Delete</button>' + "</td>";
+
+						
 						
 						// Contact ID
 						contactTable += '<td style="display: none;">' + jsonObject.results[i].id + "</td>";
@@ -419,7 +431,7 @@ function searchContact()
 					}
 					
 					// Set table
-					document.getElementById("contactTable").innerHTML = contactTable;
+					document.getElementById("contactTableBody").innerHTML = contactTable;
 				}
 			}
 		};

@@ -1,6 +1,11 @@
+/*
 body {
-    background-color: #d9d0d0;
+    /*background-color: #d9d0d0;*/
+    /*background-color: linear-gradient(#da9cfe, #fba7a7);
+    background-image: linear-gradient(Black, #87CEFA);
+
 }
+
 #searchText
 {
 	font-size: 30px;
@@ -139,13 +144,17 @@ label{
 button{
     cursor:  pointer;
 }
-/* Contact Search Table */
+/* Contact Search Table 
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    overflow-y:auto;
   }
-  
+#tableWrapper{
+    height:500px;
+    
+}
   th {
     background-color: #e6a131;
   }
@@ -165,9 +174,91 @@ table {
   }
 
   td.editable-cell {
-    background-color: #FFF9C4; /* Example background color for editable rows */
+    background-color: #FFF9C4; /* Example background color for editable rows 
   }
 
   tr.delete-row {
-    background-color: #ff0000; /* Example background color for deleting rows */
+    background-color: #ff0000; /* Example background color for deleting rows 
+}
+*/
+body {
+    background-color: #eeeeee;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+input[type="text"] {
+    border: none;
+    border-bottom: 2px solid #222831;
+    text-align: center;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 5%;
+    font-size: 16px;
+    background-color: transparent;
+    color: #222831;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #0092ca;
+}
+
+button {
+    cursor: pointer;
+    background: linear-gradient(to right, #ff105f,#ffad06);
+    border: 0;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #222831;
+    transform: scale(1.05);
+}
+
+label {
+    color: #222831;
+    margin-left: 25%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    color: #222831;
+    margin-top: 20px;
+}
+
+th {
+    background-color: #393e46;
+    padding: 10px 0;
+    color: #fff;
+}
+
+td {
+    padding: 10px 0;
+}
+
+tr:nth-child(odd) {
+    background-color: #eeeeee;
+}
+
+tr:nth-child(even) {
+    background-color: #fff;
+}
+
+td.editable-cell {
+    background-color: #FFF9C4; /* Example background color for editable rows */
+}
+
+tr.delete-row {
+    background-color: #ff0000;
+    color: #fff;
 }
