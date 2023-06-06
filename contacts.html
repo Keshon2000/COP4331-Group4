@@ -1,44 +1,71 @@
+<html lang="en">
+<head>
+    <title>Contact Manager</title>
+    <script src="js/code.js"></script>
+    <link href="css/contactstyles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            readCookie();
+        }, false);
+    </script>
+</head>
+<body onload="searchContact()">
+    <div id="loggedInDiv">
+        <span id="userName"></span><br>
+        <button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
+    </div>
+    <div id="accessUIDiv">
+        <br>
+        <!-- Search Contacts/Contacts Table -->
+        <label id="searchLabel" for="searchText">Search For Contact:</label>
+        <input type="text" id="searchContact" oninput="searchContact();" placeholder="Search For Contact">
+        <button type="button" id="searchContactButton" class="buttons" onclick="searchContact();"> Search Contact </button><br>
+        <span id="contactSearchResult"></span>
+        <!--<div id = "tableWrapper">-->
+        <table id="AddContactRow">
+            <thead>
+                <tr>
+                    <th>New Contact First Name</th>
+                    <th>New Contact Last Name</th>
+                    <th>New Contact Email</th>
+                    <th>New Contact Phone Number</th>
+                    <th>Add Contact</th>
+                </tr>
+            </thead>
+            <tbody id="AddRow">
+                <tr>
+                    <td><input type="text" id="addContactFirstName" placeholder="Contact First Name"></td>
+                    <td><input type="text" id="addContactLastName" placeholder="Contact Last Name"></td>
+                    <td><input type="text" id="addContactEmail" placeholder="Contact Email"></td>
+                    <td><input type="text" id="addContactPhone" placeholder="Contact Phone Number"></td>
+                    <td><button type="button" id="addContactButton" class="buttons" onclick="addContact();"> Add Contact </button></td>
 
-<html>
-	<head>
-		<title>Contact Manager</title>
-		<script type="text/javascript" src="js/code.js"></script>
-		<link href="css/contactstyles.css" rel="stylesheet">	
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-		
-		<script type="text/javascript">
-		document.addEventListener('DOMContentLoaded', function() 
-		{
-			readCookie();
-		}, false);
-		</script>
-		
-	</head>
-	<body onload="searchContact()">
-		<div id="loggedInDiv">
-			<span id="userName"></span><br />
-			<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
-		</div>
-		<div id="accessUIDiv">
-			<br />
-			<!-- Search Contacts/Contacts Table -->
-			<label id="searchLabel" for="searchText">Search For Contact:</label>
-			<input type="text" id="searchContact" oninput="searchContact();" placeholder="Search For Contact">
-			<button type="button" id="searchContactButton" class="buttons" onclick="searchContact();"> Search Contact </button><br />
-			<span id="contactSearchResult"></span>
-			<table id="contactTable"></table>
-			<br />
+                </tr>
+            </tbody>
+        </table>
+        <table id="contactTable">
+            <tbody id="contactTableBody">
 
-			<!-- Add Contact -->
-			<br />
-			<label for="contactName">Add Contact:</label>
-			<input type="text" id="contactFirstName" placeholder="Contact First Name">
-			<input type="text" id="contactLastName" placeholder="Contact Last Name">
-			<input type="text" id="contactEmail" placeholder="Contact Email">
-			<input type="text" id="contactPhone" placeholder="Contact Phone Number">
-			<button type="button" id="addContactButton" class="buttons" onclick="addContact();"> Add Contact </button><br />
-			<span id="contactAddResult"></span>
-			<br />
-		</div>
-	</body>
+            </tbody>
+        </table>
+        <span id="contactAddResult"></span>
+
+        <!--</div>-->
+
+        <br>
+
+        <!-- Add Contact 
+        <br>
+        <label for="contactName">Add Contact:</label>
+        <input type="text" id="contactFirstName" placeholder="Contact First Name">
+        <input type="text" id="contactLastName" placeholder="Contact Last Name">
+        <input type="text" id="contactEmail" placeholder="Contact Email">
+        <input type="text" id="contactPhone" placeholder="Contact Phone Number">
+        <button type="button" id="addContactButton" class="buttons" onclick="addContact();"> Add Contact </button><br>
+        <span id="contactAddResult"></span>
+        <br>
+        -->
+    </div>
+</body>
 </html>
